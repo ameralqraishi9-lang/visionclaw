@@ -1,5 +1,13 @@
 # VisionClaw
 
+## Personal hands-free study mode (this fork)
+
+This fork adds an iOS mode that automatically recognizes steady practice
+questions and requests an AI explanation without a spoken or typed prompt.
+It includes a Meta Display answer card and a direct personal Gemini API setup.
+It still needs an Apple-signed iPhone build and real-glasses verification.
+See [setup, limits and validation](docs/HANDS_FREE_STUDY.md).
+
 ![VisionClaw](assets/teaserimage.png)
 
 A real-time AI assistant for Meta Ray-Ban smart glasses. See what you see, hear what you say, and take actions on your behalf -- all through voice.
