@@ -1,0 +1,40 @@
+name: Study mode checks
+on:
+  push:
+    branches: [codex/automatic-study-mode]
+  pull_request:
+    paths:
+      - 'samples/CameraAccess/**'
+      - 'tests/StudyCoreTests/**'
+      - 'Package.swift'
+      - '.github/workflows/study-mode.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    runs-on: macos-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test question stability, duplication, stale answers and response validation
+        run: swift test
+  ios:
+    runs-on: macos-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Show build environment
+        run: xcodebuild -version
+      - name: Use placeholder configuration (no account credentials)
+        run: cp samples/CameraAccess/CameraAccess/Secrets.swift.example samples/CameraAccess/CameraAccess/Secrets.swift
+      - name: Build iOS simulator app without signing
+        run: |
+          xcodebuild \
+            -project samples/CameraAccess/CameraAccess.xcodeproj \
+            -scheme CameraAccess \
+            -destination 'generic/platform=iOS Simulator' \
+            -configuration Debug \
+            CODE_SIGNING_ALLOWED=NO build

@@ -145,6 +145,8 @@ class StreamSessionViewModel: ObservableObject {
   /// Bridge to the LiveKit call: every decoded glasses frame is also handed
   /// here, so the room publishes exactly what the glasses see.
   var onDecodedFrame: ((CVPixelBuffer) -> Void)?
+  /// Study mode adds the display to this same device session.
+  var onStudyDeviceSession: ((DeviceSession?) -> Void)?
 
   private func setupVideoDecoder() {
     videoDecoder.setFrameCallback { [weak self] decodedFrame in
@@ -213,12 +215,14 @@ class StreamSessionViewModel: ObservableObject {
   private func handleSessionState(_ state: DeviceSessionState) {
     switch state {
     case .started:
+      onStudyDeviceSession?(deviceSession)
       // A camera can only be added to a started session; start it now if the user
       // asked to stream and one isn't already attached.
       if wantsStream, camera == nil {
         beginStream()
       }
     case .idle, .stopped:
+      onStudyDeviceSession?(nil)
       camera = nil
       deviceSession = nil
       currentVideoFrame = nil
@@ -436,11 +440,13 @@ class StreamSessionViewModel: ObservableObject {
     let permission = Permission.camera
     do {
       let status = try await wearables.checkPermissionStatus(permission)
+      guard !Task.isCancelled, userWantsCall else { return }
       if status == .granted {
         await startSession()
         return
       }
       let requestStatus = try await wearables.requestPermission(permission)
+      guard !Task.isCancelled, userWantsCall else { return }
       if requestStatus == .granted {
         await startSession()
         return
@@ -513,6 +519,7 @@ class StreamSessionViewModel: ObservableObject {
   /// Stops the camera stream and ends the device session. `stop()` is terminal
   /// and cascades to the stream; the state observers clear our references.
   func stopSession() async {
+    onStudyDeviceSession?(nil)
     // User hang-up: stop recovering, then tear down.
     userWantsCall = false
     reconnectTask?.cancel()

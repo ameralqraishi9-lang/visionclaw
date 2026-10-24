@@ -55,6 +55,7 @@ struct CameraAccessApp: App {
 /// with the Wearables SDK is only whether the glasses affordances exist.
 struct VisionRootView: View {
   let wearables: WearablesInterface?
+  @State private var showStudy = true
   /// `-openSettings` presents Settings at launch, so screens can be captured
   /// on a simulator with no GUI to tap through.
   @State private var showSettings = ProcessInfo.processInfo.arguments.contains("-openSettings")
@@ -68,12 +69,20 @@ struct VisionRootView: View {
 
   var body: some View {
     Group {
-      if needsAccessCode {
+      if showStudy {
+        StudySessionView(wearables: wearables, openVoiceAssistant: { showStudy = false })
+      } else if needsAccessCode {
         AccessCodeView(onUnlocked: { needsAccessCode = false })
       } else if let wearables {
         GlassesCapableRootView(wearables: wearables)
       } else {
         StreamSessionView(wearables: nil, wearablesVM: nil)
+      }
+    }
+    .safeAreaInset(edge: .top) {
+      if !showStudy {
+        Button("Back to hands-free study") { showStudy = true }
+          .buttonStyle(.bordered).padding(4)
       }
     }
     // Meta AI redirects back here to complete glasses registration. Handle the

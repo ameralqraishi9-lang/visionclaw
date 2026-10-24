@@ -10,3 +10,6 @@ samples/CameraAccessAndroid/local.properties
 
 # Machine-local symlinks to the DAT SDK skills (absolute paths, not portable)
 .claude/skills/
+# Local Swift package test output
+.build/
+.swiftpm/
