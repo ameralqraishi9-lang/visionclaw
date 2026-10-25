@@ -1,0 +1,7 @@
+# Runtime data (SQLite lives here; never commit a database)
+data/
+
+node_modules/
+coverage/
+*.log
+.DS_Store

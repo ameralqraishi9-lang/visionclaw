@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#080a0d">
+  <title>Hey Claw · VisionClaw console</title>
+  <meta name="description" content="The web console for VisionClaw wearers: live AI through Meta glasses, with no prompt required.">
+  <link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/img/cover.jpg" as="image" media="(min-width: 981px)">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div id="app">
+    <div class="auth" style="grid-template-columns:1fr">
+      <main class="auth-panel">
+        <div class="auth-form" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px">
+          <span class="brand-mark" style="width:44px;height:44px;border-radius:14px">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="6.5" cy="14" r="3.4"/><circle cx="17.5" cy="14" r="3.4"/>
+              <path d="M9.9 13.6c.7-.9 3.5-.9 4.2 0"/>
+              <path d="M3.1 14V9.6A2.6 2.6 0 0 1 5.7 7H7"/>
+              <path d="M20.9 14V9.6A2.6 2.6 0 0 0 18.3 7H17"/>
+            </svg>
+          </span>
+          <div class="brand-name" style="align-items:center">
+            <strong style="font-size:16px">Hey Claw</strong>
+            <span>Opening your console…</span>
+          </div>
+          <div class="skeleton sk-line" style="width:160px;margin-top:8px"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <noscript>
+    <p style="padding:24px">Hey Claw needs JavaScript to open the live camera console.</p>
+  </noscript>
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>

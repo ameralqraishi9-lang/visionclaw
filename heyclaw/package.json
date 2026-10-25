@@ -1,0 +1,21 @@
+{
+  "name": "heyclaw",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Hey Claw \u2014 the web console for VisionClaw wearers. Live AI through Meta glasses, with no prompt.",
+  "engines": {
+    "node": ">=22.5"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning src/server.js",
+    "dev": "node --disable-warning=ExperimentalWarning --watch-path=src --watch-path=public src/server.js",
+    "seed": "node --disable-warning=ExperimentalWarning src/seed-cli.js",
+    "reset": "node --disable-warning=ExperimentalWarning src/seed-cli.js --reset",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js",
+    "smoke": "node tools/smoke.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  }
+}
