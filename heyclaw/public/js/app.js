@@ -184,7 +184,7 @@ function renderAuth(mode = "login") {
           </div>
 
           <p class="auth-foot">
-            Hey Claw is the web console for VisonClaw wearers.<br>
+            Hey Claw is the web console for VisionClaw wearers.<br>
             Camera frames stay on device; transcripts live in your account.
           </p>
         </div>
