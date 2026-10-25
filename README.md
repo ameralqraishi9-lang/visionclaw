@@ -58,6 +58,36 @@ Gemini Live API (WebSocket)
 
 ---
 
+## Web console: Hey Claw
+
+[`heyclaw/`](heyclaw/README.md) is a self-contained web console for wearers: live
+AI through your glasses, with no prompt required. It shows what the glasses saw
+and what Claw did on its own, and it is where the "no prompt" behaviour is
+configured.
+
+- **Live session** — viewfinder, transcript, and the actions Claw took (lights,
+  orders, lists, notes) without a phone in your hand.
+- **Nudges** — rules that let Claw speak first: at the door when a package is in
+  the rain, before a meeting with a parked decision, after quiet hours.
+- **Memory** — what it knows about you, where it learned it, and how to forget it.
+- Plus session history, connected apps with scopes, and voice/device/privacy
+  settings.
+
+```bash
+cd heyclaw
+npm start                     # http://localhost:3000 (no install, no build)
+# demo@heyclaw.app / glasses123
+```
+
+Node 22 + the standard library only: `node:sqlite` for storage, server-sent
+events for live updates, and a dependency-free client. See
+[heyclaw/README.md](heyclaw/README.md) for the screen tour, API surface, and the
+seeded demo data.
+
+![Hey Claw overview](heyclaw/docs/02-overview.jpg)
+
+---
+
 ## The app asks for an access code
 
 The first screen asks for an access code. The code is not something the author issues -- it is a token from **whichever gateway the app points at**, and the gate verifies it against that gateway before unlocking.
